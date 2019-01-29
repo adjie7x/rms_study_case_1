@@ -1,5 +1,6 @@
-package com.mitrais.rms.controller;
+package com.mitrais.rms.controller.user;
 
+import com.mitrais.rms.controller.AbstractController;
 import com.mitrais.rms.dao.UserDao;
 import com.mitrais.rms.dao.impl.UserDaoImpl;
 import com.mitrais.rms.model.User;
@@ -9,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.List;
 
