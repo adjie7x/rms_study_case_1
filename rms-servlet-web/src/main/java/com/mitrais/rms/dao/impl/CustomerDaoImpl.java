@@ -24,7 +24,7 @@ public class CustomerDaoImpl implements CustomerDao {
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				Customer customer = new Customer(rs.getLong("id"), rs.getString("firstname"),
-						rs.getString("firstname"), rs.getString("email"),
+						rs.getString("lastname"), rs.getString("email"),
 						rs.getString("mobile"));
 
 				return Optional.of(customer);
@@ -44,7 +44,7 @@ public class CustomerDaoImpl implements CustomerDao {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM customer");
 			while (rs.next()) {
 				Customer customer = new Customer(rs.getLong("id"), rs.getString("firstname"),
-						rs.getString("firstname"), rs.getString("email"),
+						rs.getString("lastname"), rs.getString("email"),
 						rs.getString("mobile"));
 				result.add(customer);
 			}
@@ -84,6 +84,7 @@ public class CustomerDaoImpl implements CustomerDao {
             stmt.setString(2, o.getLastName());
             stmt.setString(3, o.getEmail());
             stmt.setString(4, o.getMobile());
+            stmt.setLong(5, o.getId());
             int i = stmt.executeUpdate();
             if(i == 1) {
                 return true;

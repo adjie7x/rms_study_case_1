@@ -96,12 +96,12 @@
                 <td>${customer.mobile}</td>
                  
                 <td>
-                    <form action="<c:url value="/customer/update"/>" method="post">
+                    <form action="<c:url value="/customers/update"/>" method="post">
                         <input type="hidden" name="custId" value="${customer.id}">
                         <input type="submit" value="Update">
                     </form>
                 <td>
-                    <form action="<c:url value="/customer/delete"/>" method="post">
+                    <form action="<c:url value="/customers/delete"/>" method="post">
                         <input type="hidden" name="custId" value="${customer.id}">
                         <input style="background: #F00;" type="submit" value="Delete">
                     </form>
