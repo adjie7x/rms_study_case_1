@@ -4,8 +4,10 @@
 }
 
 .mdl-layout__content {
-	padding: 24px;
-	flex: none;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 0); 
 }
 
 .demo-layout-transparent {
