@@ -23,7 +23,7 @@
 
 <body>
 	<div class="mdl-layout mdl-js-layout mdl-color--grey-100">
-		<form action="#">
+		<form action="${pageContext.request.contextPath}/login" method="post">
 			<div class="mdl-layout__content">
 			<div class="mdl-card mdl-shadow--6dp">
 				<div
@@ -33,11 +33,11 @@
 				<div class="mdl-card__supporting-text">
 
 					<div class="mdl-textfield mdl-js-textfield">
-						<input class="mdl-textfield__input" type="text" id="username" />
+						<input class="mdl-textfield__input" type="text" id="username" name="username"/>
 						<label class="mdl-textfield__label" for="username">Username</label>
 					</div>
 					<div class="mdl-textfield mdl-js-textfield">
-						<input class="mdl-textfield__input" type="password" id="userpass" />
+						<input class="mdl-textfield__input" type="password" id="userpass" name="userpass"/>
 						<label class="mdl-textfield__label" for="userpass">Password</label>
 					</div>
 

@@ -69,7 +69,6 @@ public class RoleMenuDaoImpl implements RoleMenuDao {
 			ResultSet rs = stmt.executeQuery();
 			int idx = 0;
 			Role result = null;
-			List<Menu> menus = new ArrayList<Menu>();
 			while (rs.next()) {
 				if (idx == 0) {
 					result = new Role(rs.getString("role_id"),
@@ -79,13 +78,14 @@ public class RoleMenuDaoImpl implements RoleMenuDao {
 				Menu menu = new Menu(rs.getLong("menu_id"),
 						rs.getString("title"), rs.getString("link"),
 						rs.getString("desc"));
-				menus.add(menu);
+
+				result.getMenus().add(menu);
+				result.getUrlPatterns().add(rs.getString("link"));
 
 				idx++;
 			}
 
 			if (idx > 0) {
-				result.setMenus(menus);
 
 				return Optional.of(result);
 			}

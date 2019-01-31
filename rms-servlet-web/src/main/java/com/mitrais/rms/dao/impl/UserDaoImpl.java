@@ -153,4 +153,25 @@ public class UserDaoImpl implements UserDao {
 
 		return Optional.empty();
 	}
+
+	@Override
+	public Optional<User> findUserByUserNameAndPwd(String userName,
+			String userPassword) {
+		try (Connection connection = DataSourceFactory.getConnection()) {
+			PreparedStatement stmt = connection
+					.prepareStatement("SELECT * FROM user WHERE user_name=? AND password = ?");
+			stmt.setString(1, userName);
+			stmt.setString(2, userPassword);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				User user = new User(rs.getLong("id"),
+						rs.getString("user_name"), rs.getString("password"));
+				return Optional.of(user);
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+		return Optional.empty();
+	}
 }

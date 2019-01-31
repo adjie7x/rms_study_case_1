@@ -5,7 +5,13 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.mitrais.rms.dao.UserDao;
+import com.mitrais.rms.dao.impl.UserDaoImpl;
+import com.mitrais.rms.model.User;
+
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet("/login")
 public class LoginServlet extends AbstractController
@@ -22,6 +28,22 @@ public class LoginServlet extends AbstractController
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        super.doPost(req, resp);
+    	String username = req.getParameter("username");
+        String userpass = req.getParameter("userpass");
+        
+        UserDao userDao = UserDaoImpl.getInstance();
+        Optional<User> optional = userDao.findUserByUserNameAndPwd(username, userpass);
+        if (!optional.isPresent()) {
+        	String errorMessage = "Invalid userName or Password";
+            
+            req.setAttribute("errorMessage", errorMessage);
+            this.doGet(req, resp);
+            
+            return;
+		}
+        
+        resp.sendRedirect(req.getContextPath() + "/customers/list");
+         
+       
     }
 }

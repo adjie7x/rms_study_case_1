@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mitrais.rms.utilities.SecurityUtils;
+import com.mitrais.rms.utilities.UrlPatternUtils;
+
 @WebFilter(urlPatterns = {"/*"})
 public class AuthenticationFilter implements Filter{
 	

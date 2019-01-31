@@ -9,6 +9,8 @@ public class Role {
 	private String roleName;
 
 	private List<Menu> menus = new ArrayList<Menu>();
+	
+	private List<String> urlPatterns = new ArrayList<String>();
 
 	public Role() {
 	}
@@ -42,5 +44,14 @@ public class Role {
 	public void setMenus(List<Menu> menus) {
 		this.menus = menus;
 	}
+
+	public List<String> getUrlPatterns() {
+		return urlPatterns;
+	}
+
+	public void setUrlPatterns(List<String> urlPatterns) {
+		this.urlPatterns = urlPatterns;
+	}
+	
 
 }

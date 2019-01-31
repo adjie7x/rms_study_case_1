@@ -17,4 +17,6 @@ public interface UserDao extends Dao<User, Long>
     Optional<User> findByUserName(String userName);
     
     Optional<User> findUserRoleByUserName(String userName);
+    
+    Optional<User> findUserByUserNameAndPwd(String userName, String userPassword);
 }
