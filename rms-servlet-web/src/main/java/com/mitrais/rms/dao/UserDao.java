@@ -15,4 +15,6 @@ public interface UserDao extends Dao<User, Long>
      * @return user
      */
     Optional<User> findByUserName(String userName);
+    
+    Optional<User> findUserRoleByUserName(String userName);
 }
