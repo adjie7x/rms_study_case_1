@@ -5,6 +5,9 @@ public class RoleMenu {
 	private Role role;
 	private Menu menu;
 
+	public RoleMenu() {
+	}
+
 	public RoleMenu(Role role, Menu menu) {
 		super();
 		this.role = role;
