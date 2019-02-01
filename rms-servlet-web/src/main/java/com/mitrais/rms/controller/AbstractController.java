@@ -11,7 +11,7 @@ public abstract class AbstractController extends HttpServlet
     {
         if (path.equalsIgnoreCase("/"))
         {
-            return VIEW_PREFIX + path + "index" + VIEW_SUFFIX;
+            return VIEW_PREFIX + path + "home" + VIEW_SUFFIX;
         }
         else
         {

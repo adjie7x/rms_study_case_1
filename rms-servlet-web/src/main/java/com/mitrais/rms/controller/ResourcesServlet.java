@@ -2,29 +2,21 @@ package com.mitrais.rms.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet({"/"})
-public class IndexServlet extends AbstractController{
+//@WebServlet({"/css/*","/js/*"})
+public class ResourcesServlet extends AbstractController{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		String servletPath = req.getServletPath();
 		String pathInfo = req.getPathInfo();
-		RequestDispatcher requestDispatcher;
-		if("/".equals(servletPath)){
-			requestDispatcher = req.getRequestDispatcher(getTemplatePath("/"));
-		}else {
-			requestDispatcher = req.getRequestDispatcher(servletPath);
-		}
-		
-        requestDispatcher.forward(req, resp);
-		
+		req.getRequestDispatcher(servletPath+pathInfo).forward(req, resp);
 	}
 	
 	@Override

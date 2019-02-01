@@ -54,9 +54,10 @@ public class AuthenticationFilter implements Filter{
         	return;
         }else if(uri.indexOf("/css/") != -1 || uri.indexOf("/js/") != -1){
         	logger.info("css js filter");
-//        	RequestDispatcher requestDispatcher = req.getRequestDispatcher(servletPath);
-//            requestDispatcher.forward(req, res);
         	chain.doFilter(req, res);
+//    		String pathInfo = req.getPathInfo();
+//    		req.getRequestDispatcher(servletPath+pathInfo).forward(req, res);
+        	return;
         }else{
         	logger.info("AuthenticationFilter do filter");
             
