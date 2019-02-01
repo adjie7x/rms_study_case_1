@@ -166,6 +166,10 @@ public class UserDaoImpl implements UserDao {
 			if (rs.next()) {
 				User user = new User(rs.getLong("id"),
 						rs.getString("user_name"), rs.getString("password"));
+				
+				Role role = new Role(rs.getString("role_id"), null);
+				user.setRole(role);
+				
 				return Optional.of(user);
 			}
 		} catch (SQLException ex) {

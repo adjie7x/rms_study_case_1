@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -43,14 +44,23 @@ public class AuthenticationFilter implements Filter{
         HttpServletRequest wrapRequest = req;
         
         String servletPath = req.getServletPath();
+        logger.info("servletPath : "+servletPath);
         
-        logger.info("AuthenticationFilter do filter");
+        String uri = req.getRequestURI();
         
-        if("/login".equals(servletPath) || "/css".equals(servletPath)){
+        if("/login".equals(servletPath)){
         	logger.info("redirect login page");
         	chain.doFilter(req, res);
         	return;
+        }else if(uri.indexOf("/css/") != -1 || uri.indexOf("/js/") != -1){
+        	logger.info("css js filter");
+//        	RequestDispatcher requestDispatcher = req.getRequestDispatcher(servletPath);
+//            requestDispatcher.forward(req, res);
+        	chain.doFilter(req, res);
         }else{
+        	logger.info("AuthenticationFilter do filter");
+            
+            boolean isSecuredPage = SecurityUtils.isSecurityPage(wrapRequest);
         	chain.doFilter(wrapRequest, res);
         }
 		

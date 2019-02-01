@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mitrais.rms.dao.UserDao;
 import com.mitrais.rms.dao.impl.UserDaoImpl;
 import com.mitrais.rms.model.User;
+import com.mitrais.rms.utilities.AppUtils;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -42,7 +43,23 @@ public class LoginServlet extends AbstractController
             return;
 		}
         
-        resp.sendRedirect(req.getContextPath() + "/customers/list");
+        AppUtils.storeLoginedUser(req.getSession(), optional.get());
+        
+        int redirectId = -1;
+        try {
+			redirectId = Integer.parseInt(req.getParameter("redirectId"));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+        
+        String requestUri = AppUtils.getRedirectAfterLoginUrl(req.getSession(), redirectId);
+        if (requestUri != null) {
+            resp.sendRedirect(requestUri);
+        } else {
+            // Default after successful login
+            // redirect to /customers/list page
+        	resp.sendRedirect(req.getContextPath() + "/customers/list");
+        }
          
        
     }
