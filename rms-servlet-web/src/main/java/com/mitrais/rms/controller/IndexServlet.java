@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet({"/"})
+@WebServlet({"/home"})
 public class IndexServlet extends AbstractController{
 	
 	@Override
@@ -16,12 +16,12 @@ public class IndexServlet extends AbstractController{
 			throws ServletException, IOException {
 		String servletPath = req.getServletPath();
 		String pathInfo = req.getPathInfo();
-		RequestDispatcher requestDispatcher;
-		if("/".equals(servletPath)){
-			requestDispatcher = req.getRequestDispatcher(getTemplatePath("/"));
-		}else {
-			requestDispatcher = req.getRequestDispatcher(servletPath);
-		}
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher(getTemplatePath("/home"));
+//		if("/".equals(servletPath)){
+//			requestDispatcher = req.getRequestDispatcher(getTemplatePath("/"));
+//		}else {
+//			requestDispatcher = req.getRequestDispatcher(servletPath);
+//		}
 		
         requestDispatcher.forward(req, resp);
 		

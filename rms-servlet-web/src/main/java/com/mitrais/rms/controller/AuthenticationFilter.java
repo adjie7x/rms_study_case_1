@@ -52,11 +52,9 @@ public class AuthenticationFilter implements Filter{
         	logger.info("redirect login page");
         	chain.doFilter(req, res);
         	return;
-        }else if(uri.indexOf("/css/") != -1 || uri.indexOf("/js/") != -1){
-        	logger.info("css js filter");
-        	chain.doFilter(req, res);
-//    		String pathInfo = req.getPathInfo();
-//    		req.getRequestDispatcher(servletPath+pathInfo).forward(req, res);
+        }else if("/".equals(servletPath)){
+        	logger.info("accesing index page ...");
+    		req.getRequestDispatcher("/home").forward(req, res);
         	return;
         }else{
         	logger.info("AuthenticationFilter do filter");
