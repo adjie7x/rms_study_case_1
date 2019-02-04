@@ -1,33 +1,54 @@
 package com.mitrais.rms.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 	private Long id;
 	private String userName;
 	private String password;
-	private Role role;
-
+	
+	private List<String> roles = new ArrayList<>();
+	
+	public User() {
+		
+	}	
+	
 	public User(Long id, String userName, String password) {
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
 	}
 	
-	public User(Long id, String userName, String password, Role role) {
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
+	public User(Long id, String userName, String password, String... roles) {
 		super();
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
-		this.role = role;
+		
+		this.roles = new ArrayList<String>();
+	      if (roles != null) {
+	         for (String r : roles) {
+	            this.roles.add(r);
+	         }
+	      }
 	}
-
-
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
+	
+	public User(Long id, String userName, String password, List<String> roles) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+		
+		this.roles = roles;
 	}
 
 	public void setId(Long id) {

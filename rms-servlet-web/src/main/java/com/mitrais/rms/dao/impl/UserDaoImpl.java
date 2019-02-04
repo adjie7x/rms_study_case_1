@@ -135,18 +135,35 @@ public class UserDaoImpl implements UserDao {
 	public Optional<User> findUserRoleByUserName(String userName) {
 		try (Connection connection = DataSourceFactory.getConnection()) {
 			PreparedStatement stmt = connection
-					.prepareStatement("SELECT u.id, u.user_name, u.password, u.role_id, r.role_name "
-							+ "FROM USER u "
-							+ "LEFT JOIN role r ON u.role_id = r.role_id "
-							+ "WHERE u.user_name = ?");
+					.prepareStatement("SELECT "
+							+ "u.id, "
+							+ "u.user_name, "
+							+ "u.password,"
+							+ "ur.role_id "
+							+ "FROM "
+							+ "user u LEFT JOIN user_role ur "
+							+ "ON u.user_name = ur.user_name"
+							+ "WHERE "
+							+ "u.user_name = ?");
 			stmt.setString(1, userName);
 			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
-				Role role = new Role(rs.getString("role_id"), rs.getString("role_name"));
-				User user = new User(rs.getLong("id"),
-						rs.getString("user_name"), rs.getString("password"), role);
+			
+			int idx = 0;
+			User user = new User();
+			while (rs.next()) {
+				if (idx == 0) {
+					user = new User(rs.getLong("id"),
+							rs.getString("user_name"), rs.getString("password"));
+				}
+				
+				user.getRoles().add(rs.getString("role_id"));
+				idx++;
+			}
+			
+			if (idx > 0) {
 				return Optional.of(user);
 			}
+			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -159,17 +176,34 @@ public class UserDaoImpl implements UserDao {
 			String userPassword) {
 		try (Connection connection = DataSourceFactory.getConnection()) {
 			PreparedStatement stmt = connection
-					.prepareStatement("SELECT * FROM user WHERE user_name=? AND password = ?");
+					.prepareStatement("SELECT "
+							+ "u.id, "
+							+ "u.user_name, "
+							+ "u.password,"
+							+ "ur.role_id "
+							+ "FROM "
+							+ "user u LEFT JOIN user_role ur "
+							+ "ON u.user_name = ur.user_name "
+							+ "WHERE "
+							+ "u.user_name = ?"
+							+ "AND u.PASSWORD = ?");
 			stmt.setString(1, userName);
 			stmt.setString(2, userPassword);
 			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
-				User user = new User(rs.getLong("id"),
-						rs.getString("user_name"), rs.getString("password"));
+			
+			int idx = 0;
+			User user = new User();
+			while (rs.next()) {
+				if (idx == 0) {
+					user = new User(rs.getLong("id"),
+							rs.getString("user_name"), rs.getString("password"));
+				}
 				
-				Role role = new Role(rs.getString("role_id"), null);
-				user.setRole(role);
+				user.getRoles().add(rs.getString("role_id"));
+				idx++;
 				
+			}
+			if (idx > 0) {
 				return Optional.of(user);
 			}
 		} catch (SQLException ex) {

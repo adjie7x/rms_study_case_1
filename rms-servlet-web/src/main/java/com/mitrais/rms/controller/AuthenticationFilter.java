@@ -46,7 +46,7 @@ public class AuthenticationFilter implements Filter{
         String servletPath = req.getServletPath();
         logger.info("servletPath : "+servletPath);
         
-        String uri = req.getRequestURI();
+//        String uri = req.getRequestURI();
         
         if("/login".equals(servletPath)){
         	logger.info("redirect login page");
@@ -56,6 +56,9 @@ public class AuthenticationFilter implements Filter{
         	logger.info("accesing index page ...");
     		req.getRequestDispatcher("/home").forward(req, res);
         	return;
+        }else if(servletPath.indexOf("css") != -1 || servletPath.indexOf("js") != -1){
+        	logger.info("static folder");
+        	chain.doFilter(req, res);
         }else{
         	logger.info("AuthenticationFilter do filter");
             
