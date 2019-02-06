@@ -17,7 +17,7 @@ public class LogoutServlet extends AbstractController{
 		req.getSession().invalidate();
 		 
         // Redrect to Home Page.
-        resp.sendRedirect(req.getContextPath() + "/");
+        resp.sendRedirect(req.getContextPath() + "/login");
 	}
 	
 	@Override

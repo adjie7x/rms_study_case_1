@@ -41,9 +41,20 @@ public class SecurityUtils {
 		String urlPattern = UrlPatternUtils.getUrlPattern(request);
 		
 		RoleDao roleDao = RoleDaoImpl.getInstance();
+		RoleMenuDao roleMenuDao = RoleMenuDaoImpl.getInstance();
 		List<String> roleStrings = roleDao.findAllRoleID();
 		for (String roleStr : roleStrings) {
-			
+			if (!request.isUserInRole(roleStr)) {
+                continue;
+            }
+			Optional<Role> optional = roleMenuDao.findRoleMenuByRoleId(roleStr);
+			if (!optional.isPresent()) {
+				continue;
+			}
+			List<String> urlPatterns = optional.get().getUrlPatterns();
+			if (urlPatterns.contains(urlPattern)) {
+				return true;
+			}
 		}
 		
 		return false;

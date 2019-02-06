@@ -33,20 +33,20 @@
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation -->
           <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="users/list">Users</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
+          	<a class="mdl-navigation__link" href="${pageContext.request.contextPath}/">Home</a>
+            <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/users/list">Users</a>
+            <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/customers/list">Customers</a>
+            <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/logout">Logout</a>
           </nav>
         </div>
       </header>
       <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">RMS</span>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="users/list">Users</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
+          <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/">Home</a>
+          <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/users/list">Users</a>
+          <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/customers/list">Customers</a>
+          <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/logout">Logout</a>
         </nav>
       </div>
       <main class="mdl-layout__content">
